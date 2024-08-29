@@ -208,6 +208,12 @@
       "openInEditor": true
     },
     {
+      "template": "package-info.java.ft",
+      "destination": "src/main/java/${MAIN_CLASS.packagePath}/package-info.java",
+      "condition": "$LANGUAGE=='Java'",
+      "openInEditor": false
+    },
+    {
       "template": "MainClass.kt.ft",
       "destination": "src/main/kotlin/${MAIN_CLASS.path}.kt",
       "condition": "$LANGUAGE=='Kotlin'",
