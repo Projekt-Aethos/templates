@@ -54,19 +54,26 @@
         </configuration>
       </plugin>
 #end
+#if ($IS_PAPER)
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-shade-plugin</artifactId>
-        <version>3.5.3</version>
+        <groupId>de.aethos</groupId>
+        <artifactId>server-maven-plugin</artifactId>
+        <version>1.4.8-SNAPSHOT</version>
         <executions>
           <execution>
-            <phase>package</phase>
+            <configuration>
+              <paperVersion>${MC_VERSION}</paperVersion>
+              <dependencies>false</dependencies>
+            </configuration>
             <goals>
-              <goal>shade</goal>
+              <goal>run</goal>
+              <goal>clean</goal>
             </goals>
           </execution>
         </executions>
       </plugin>
+#end
+
     </plugins>
     <resources>
       <resource>
@@ -75,6 +82,15 @@
       </resource>
     </resources>
   </build>
+
+#if ($IS_PAPER)
+  <pluginRepositories>
+    <pluginRepository>
+      <id>aethos-reposilite</id>
+      <url>https://reposilite.aethosserver.de/releases/</url>
+    </pluginRepository>
+  </pluginRepositories>
+#end
 
   <repositories>
 #if ($IS_SPIGOT)
@@ -86,6 +102,11 @@
       <repository>
         <id>papermc-repo</id>
         <url>https://repo.papermc.io/repository/maven-public/</url>
+      </repository>
+      <repository>
+        <id>aethos-repository-releases</id>
+        <name>Aethos Repository</name>
+        <url>https://reposilite.aethosserver.de/releases</url>
       </repository>
 #end
     <repository>
@@ -109,6 +130,12 @@
       <version>${MC_VERSION}-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>de.aethos</groupId>
+      <artifactId>lib</artifactId>
+      <version>3.7.1</version>
+    </dependency>
+
 #end
 #if (${LANGUAGE} == 'Kotlin')
     <dependency>
